@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express');
 const nodemailer = require('nodemailer');
 
 const app = express()
@@ -18,8 +18,7 @@ app.listen(3002, function() {
 })
 
 app.get('/mail', function (req, res){
-    // Testing email
-
+    //cre
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -27,7 +26,6 @@ app.get('/mail', function (req, res){
             pass: "test@123!"
         }
     });
-
     const message = {
         from: 'guyntare745@gmail.com',
         to: 'samuel.nishimwe@andela.com',
@@ -39,7 +37,7 @@ app.get('/mail', function (req, res){
         if (error){
             console.log(error);
         }else{
-            res.send('Email sent: ' + info.response);
+            res.send('Email sent: ' + message.to);
             console.info("Email sent")
         }
     });
