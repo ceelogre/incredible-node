@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const lookup = require('country-code-lookup');
 const app = express()
@@ -31,4 +32,31 @@ app.post('/country', (req,res) => {
 })
 app.listen(3002, function() {
     console.info('Application is running locally on 3002')
+})
+
+app.get('/mail', function (req, res){
+    //cre
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: "guyntare745@gmail.com",
+            pass: "test@123!"
+        }
+    });
+    const message = {
+        from: 'guyntare745@gmail.com',
+        to: 'samuel.nishimwe@andela.com',
+        subject: 'Sending email with node.js',
+        text: 'Good morning Samuel, I just sent you this email in node.js tbh this is lit :)'
+    };
+
+    transporter.sendMail(message, function(error, info){
+        if (error){
+            console.log(error);
+        }else{
+            res.send('Email sent: ' + message.to);
+            console.info("Email sent")
+        }
+    });
+
 })
