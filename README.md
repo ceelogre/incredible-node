@@ -1,6 +1,6 @@
 # NODEMAILER
 
-Foobar is a Python library for dealing with word pluralization.
+Nodemailer is a module for Node.js applications to allow easy as cake email sending.
 
 ## Installation
 
