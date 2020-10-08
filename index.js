@@ -1,4 +1,28 @@
 const express = require('express')
+const fs= require('fs')
+// read file
+fs.readFile('./blog.text',(err,data)=>{
+    if (err){
+        console.log(err)
+    }else{
+        console.log(data.toString)
+    }
+})
+// write file
+fs.writeFile('./blog1.text','Happy coding!',()=>{
+   console.log('File was written')
+})
+//delete a file
+
+if(fs.existsSync('./blog2.text')){
+    fs.unlink('./blog2.text',(err)=>{
+        if (err){
+            console.log(err)
+        }else{
+            console.log('file deleted!')
+        }
+    })
+}
 
 const app = express()
 
