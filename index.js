@@ -2,9 +2,12 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const lookup = require('country-code-lookup');
+const router = require('./user');
+
 const app = express()
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use('/', router);
 app.get('/', function (req, res) {
     res.send('Welcome to our Node Incredibles!')
 })
