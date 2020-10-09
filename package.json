@@ -14,7 +14,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "country-code-lookup": "0.0.18",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nodemailer": "^6.4.13"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "country-code-lookup": "0.0.18"
   }
 }
