@@ -1,11 +1,11 @@
-import express, { json } from "express";
-import { config } from "dotenv";
+import pkg  from "express";
+import express from 'express'
+import "dotenv/config.js"
 import nodemailer from 'nodemailer';
 import lookup  from'country-code-lookup';
-import router  from './user';
+import router  from './user.js';
 
-
-config();
+const {json} = pkg
 const app = express();
 app.use(json());
 
