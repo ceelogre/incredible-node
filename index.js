@@ -1,11 +1,13 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
-const lookup = require('country-code-lookup');
-const router = require('./user');
+import express, { json } from "express";
+import { config } from "dotenv";
+import nodemailer from 'nodemailer';
+import lookup  from'country-code-lookup';
+import router  from './user';
 
-const app = express()
-app.use(bodyParser.urlencoded({extended: true}));
+
+config();
+const app = express();
+app.use(json());
 
 app.use('/', router);
 app.get('/', function (req, res) {
@@ -32,9 +34,6 @@ app.post('/country', (req,res) => {
     res.write("<h3>Iso 2 code: " + countryResult.iso2 + '</h3>');
     res.write("<h3>Iso 3 code: " + countryResult.iso3 + '</h3>');
     res.send();
-})
-app.listen(3002, function() {
-    console.info('Application is running locally on 3002')
 })
 
 app.get('/mail', function (req, res){
@@ -63,3 +62,7 @@ app.get('/mail', function (req, res){
     });
 
 })
+const port = process.env.PORT;
+app.listen(port || 4000, function () {
+  console.info(`Application is running locally on ${port}`);
+});
