@@ -4,11 +4,19 @@ import "dotenv/config.js"
 import nodemailer from 'nodemailer';
 import lookup  from'country-code-lookup';
 import router  from './user.js';
+import bodyParser from 'body-parser';
+
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const {json} = pkg
 const app = express();
 app.use(json());
 
+app.use(bodyParser.urlencoded({extended: true}));
 app.use('/', router);
 app.get('/', function (req, res) {
     res.send('Welcome to our Node Incredibles!')
