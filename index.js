@@ -5,6 +5,8 @@ import nodemailer from 'nodemailer';
 import lookup  from'country-code-lookup';
 import router  from './user.js';
 import bodyParser from 'body-parser';
+import ucase from 'upper-case';
+import cdt from './dateTimeModule';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -21,7 +23,12 @@ app.use('/', router);
 app.get('/', function (req, res) {
     res.send('Welcome to our Node Incredibles!')
 })
-
+app.get('/uc', function(req,res){
+    res.send(ucase.upperCase('put all letters in capital letter'));
+})
+app.get('/cdt',function(req,res){
+    res.send('The current date and time is '+cdt.getCurrentDateTime());
+})
 app.get('/users', function (req, res) {
     res.send('Users will appear here')
 })
@@ -70,6 +77,7 @@ app.get('/mail', function (req, res){
     });
 
 })
+
 const port = process.env.PORT;
 app.listen(port || 4000, function () {
   console.info(`Application is running locally on ${port}`);
