@@ -3,6 +3,8 @@ const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const lookup = require('country-code-lookup');
 const router = require('./user');
+const ucase=require('upper-case');
+const cdt=require('./dateTimeModule');
 
 const app = express()
 app.use(bodyParser.urlencoded({extended: true}));
@@ -62,4 +64,10 @@ app.get('/mail', function (req, res){
         }
     });
 
+})
+app.get('/uc', function(req,res){
+    res.send(ucase.upperCase('put all letters in capital letter'));
+})
+app.get('/cdt',function(req,res){
+    res.send('The current date and time is '+cdt.getCurrentDateTime());
 })
