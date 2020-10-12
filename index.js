@@ -40,15 +40,22 @@ app.get('/country', (req,res) => {
 })
 app.post('/country', (req,res) => {
     let countryName = String(req.body.country);
+    countryName = countryName.charAt(0).toUpperCase() + countryName.slice(1);
     let countryResult = lookup.byCountry(countryName);
     res.set("Content-Type", "text/html");
-    res.write('<h3>Country Searched: ' + countryResult.country + '</h3>');
+    try{
+        res.write('<h3>Country Searched: ' + countryResult.country + '</h3>');
     res.write("<h3>Continet:"  + countryResult.continent + '</h3>');
     res.write("<h3>Region: " + countryResult.region + '</h3>');
     res.write("<h3>Capital City: " + countryResult.capital + '</h3>');
     res.write("<h3>Iso 2 code: " + countryResult.iso2 + '</h3>');
     res.write("<h3>Iso 3 code: " + countryResult.iso3 + '</h3>');
     res.send();
+    }
+    catch{
+        res.send("Please enter a valid country or Check you spelling and ensure you use capitalisation");
+    }
+    
 })
 
 app.get('/mail', function (req, res){
