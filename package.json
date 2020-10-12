@@ -2,10 +2,12 @@
   "name": "incredible-node",
   "version": "1.0.0",
   "description": "web server",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon --exec babel-node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [
     "node",
@@ -14,11 +16,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "country-code-lookup": "0.0.18",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "nodemailer": "^6.4.13"
   },
   "devDependencies": {
     "nodemon": "^2.0.4",
-    "country-code-lookup": "0.0.18"
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.5"
   }
 }

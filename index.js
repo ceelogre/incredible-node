@@ -1,19 +1,34 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
-const lookup = require('country-code-lookup');
-const router = require('./user');
-const ucase=require('upper-case');
-const cdt=require('./dateTimeModule');
+import pkg  from "express";
+import express from 'express'
+import "dotenv/config.js"
+import nodemailer from 'nodemailer';
+import lookup  from'country-code-lookup';
+import router  from './user.js';
+import bodyParser from 'body-parser';
+import ucase from 'upper-case';
+import cdt from './dateTimeModule';
 
-const app = express()
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const {json} = pkg
+const app = express();
+app.use(json());
+
 app.use(bodyParser.urlencoded({extended: true}));
-
 app.use('/', router);
 app.get('/', function (req, res) {
     res.send('Welcome to our Node Incredibles!')
 })
-
+app.get('/uc', function(req,res){
+    res.send(ucase.upperCase('put all letters in capital letter'));
+})
+app.get('/cdt',function(req,res){
+    res.send('The current date and time is '+cdt.getCurrentDateTime());
+})
 app.get('/users', function (req, res) {
     res.send('Users will appear here')
 })
@@ -34,9 +49,6 @@ app.post('/country', (req,res) => {
     res.write("<h3>Iso 2 code: " + countryResult.iso2 + '</h3>');
     res.write("<h3>Iso 3 code: " + countryResult.iso3 + '</h3>');
     res.send();
-})
-app.listen(3002, function() {
-    console.info('Application is running locally on 3002')
 })
 
 app.get('/mail', function (req, res){
@@ -65,9 +77,8 @@ app.get('/mail', function (req, res){
     });
 
 })
-app.get('/uc', function(req,res){
-    res.send(ucase.upperCase('put all letters in capital letter'));
-})
-app.get('/cdt',function(req,res){
-    res.send('The current date and time is '+cdt.getCurrentDateTime());
-})
+
+const port = process.env.PORT;
+app.listen(port || 4000, function () {
+  console.info(`Application is running locally on ${port}`);
+});
