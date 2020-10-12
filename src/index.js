@@ -3,7 +3,7 @@ import express from 'express'
 import "dotenv/config.js"
 import nodemailer from 'nodemailer';
 import lookup  from'country-code-lookup';
-import router  from './user.js';
+import router  from '../routes/user.js/index.js';
 import bodyParser from 'body-parser';
 
 import { fileURLToPath } from 'url';
