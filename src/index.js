@@ -5,6 +5,7 @@ import nodemailer from 'nodemailer';
 import lookup  from'country-code-lookup';
 import router  from '../routes/user.js';
 import bodyParser from 'body-parser';
+import path from 'path'
 import '../config/db.js'
 
 import { fileURLToPath } from 'url';
@@ -30,7 +31,8 @@ app.get('/watches', function (req, res) {
     res.send('NEw watches coming soon!')
 })
 app.get('/country', (req,res) => {
-    res.sendFile(__dirname + '/country.html');
+    const filePath = path.resolve(__dirname + '/..'+ '/public/country.html')
+    res.sendFile(filePath);
 })
 app.post('/country', (req,res) => {
     let countryName = String(req.body.country);
