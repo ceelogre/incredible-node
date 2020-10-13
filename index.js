@@ -5,6 +5,7 @@ import nodemailer from 'nodemailer';
 import lookup  from'country-code-lookup';
 import router  from './user.js';
 import bodyParser from 'body-parser';
+import  wifiName from 'wifi-name';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -21,6 +22,14 @@ app.use('/', router);
 app.get('/', function (req, res) {
     res.send('Welcome to our Node Incredibles!')
 })
+app.get('/wifiname', function(req,res){
+wifiName().then(name => {
+    console.log(`your current wifi is:${name}`);
+    
+    res.json(`your current wifi is:${name}`)
+});
+})
+
 
 app.get('/users', function (req, res) {
     res.send('Users will appear here')
